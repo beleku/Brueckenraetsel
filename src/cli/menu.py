@@ -7,25 +7,22 @@ def run(stdscr: curses.window):
     # Key map to display
     key_map = "q - Quit | h - Help | Arrows - Navigate | Enter - Select Option"
     selection = 0
-    options = ["play", "help", "exit"]
+    options = ["new game", "help", "exit"]
+    return_code = [["GAME", 1], ["HELP", 1], ["EXIT", 1]]
+    curses.curs_set(0)
+
     while True:
         draw(stdscr, options, selection)
         try:
             key = stdscr.getch()
         except curses.error:
             continue
-        if key == curses.KEY_UP:
+        if key == curses.KEY_UP or key == ord('k'):
             selection = (selection - 1) % len(options)
-        elif key == curses.KEY_DOWN:
+        elif key == curses.KEY_DOWN or key == ord('j'):
             selection = (selection + 1) % len(options)
         elif key == curses.KEY_ENTER or key in [10, 13]:
-            time.sleep(1)
-            if selection == 0:
-                return "GAME", 1
-            elif selection == 1:
-                return "HELP", 1
-            elif selection == 2:
-                return "EXIT"
+            return return_code[selection]
         elif key == ord('q'):
             return "EXIT", 1
 
@@ -33,9 +30,16 @@ def run(stdscr: curses.window):
 def draw(stdscr, options, selected, x=2, y=1):
     stdscr.clear()
     stdscr.addstr(y, x, "Brückenrätsel | Menu", curses.A_BOLD)
+    key_map = " q - Quit | h - Help | Arrows - Navigate | Enter - Select Option"
+    height, width = stdscr.getmaxyx()
+    stdscr.addstr(height - 1, 0, " " * (width - 1), curses.color_pair(1))
+
+    # Display the key map at the bottom row
+    stdscr.addstr(height - 1, 0, key_map[:width - 1], curses.color_pair(1))  # Truncate if necessary
+    stdscr.refresh()
+
     for i, option in enumerate(options):
         if i == selected:
             stdscr.addstr(y + 1 + i, x + 1, "> " + option)
         else:
             stdscr.addstr(y + 1 + i, x + 1, option)
-    stdscr.refresh()
