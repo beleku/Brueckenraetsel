@@ -2,7 +2,6 @@ import curses
 from curses import wrapper
 from curses.textpad import rectangle
 
-from src.cli import grid
 from src.cli import menu
 from src.cli import game
 
