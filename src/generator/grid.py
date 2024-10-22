@@ -33,15 +33,23 @@ def generate(riddle, solution: str):
 
     grid = []
     grid_solution = []
+    mask_editable = []
     for i, r in enumerate(riddle):
         out = " " * word_pos[i] + r[0] + " " * len(r[1]) + r[2]
+        out += " " * (x - len(out))
         grid.append([c for c in out])
 
         out_solution = " " * word_pos[i] + "".join(r)
+        out_solution += " " * (x - len(out_solution))
         grid_solution.append([c for c in out_solution])
 
+        out_editable = "x" * word_pos[i] + r[0] + " " * len(r[1]) + r[2]
+        out_editable += "x" * x
+        out_editable = [1 if c == " " else 0 for c in out_editable]
+        mask_editable.append(out_editable)
 
-    print(grid)
+
+    return grid, grid_solution, mask_editable, solution_idx
 
 
 
