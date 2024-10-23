@@ -5,7 +5,7 @@ from src.cli import table
 from src.generator.cursor_logic import Cursor
 
 
-def run(stdscr: curses.window, difficulty: int):
+def init(stdscr: curses.window):
     riddle = [["vogel", "schreck", "schraube"],
               ["haar", "gummi", "baer", ],
               ["laden", "schluss", "licht"],
@@ -15,17 +15,17 @@ def run(stdscr: curses.window, difficulty: int):
               ["wochen", "tage", "dieb"],
               ["quell", "code", "wort"]]
     solution = "eissorte"
+    board, grid_solution, mask, idx = generator.generate(riddle, solution)
+    return run(stdscr, board, grid_solution, mask, idx)
 
-    grid, grid_solution, mask, solution_idx = generator.generate(riddle, solution)
-    current_game_state = grid.copy()
 
+def run(stdscr: curses.window, game_state: list, game_solution: list, mask: list, solution_idx: int):
     stdscr.clear()
     stdscr.addstr(0, 0, "Brückenrätsel | Spiel", curses.A_BOLD)
-
     cursor = Cursor(0, 0, mask)
 
     while True:
-        draw(stdscr, current_game_state, mask, cursor.get_pos_yx())
+        draw(stdscr, game_state, mask, cursor.get_pos_yx())
 
         key = stdscr.getch()
         if key == curses.KEY_UP:
@@ -38,18 +38,18 @@ def run(stdscr: curses.window, difficulty: int):
             cursor.move_right()
 
         if key == ord("\t"):
-            return "MENU"
+            return "MENU", game_state, game_solution, mask, solution_idx
 
         # if key is letter
         if 65 <= key <= 90 or 97 <= key <= 122:
             y, x = cursor.get_pos_yx()
-            current_game_state[y][x] = chr(key).lower()
+            game_state[y][x] = chr(key).lower()
             cursor.move_right()
 
         # if key is backspace
-        if key == 127:
+        if key == curses.KEY_BACKSPACE:
             y, x = cursor.get_pos_yx()
-            current_game_state[y][x] = " "
+            game_state[y][x] = " "
             cursor.move_left()
 
 
@@ -75,7 +75,7 @@ def draw(stdscr: curses.window, grid: list, mask: list, selected: tuple, pos_y=1
             if selected == (y, x):
                 stdscr.addstr(pos_y + 2 + y*2, pos_x + 2 + x*4, cell.upper(), curses.A_REVERSE)
             elif mask[y][x]:
-                stdscr.addstr(pos_y + 2 + y*2, pos_x + 2 + x*4, cell.upper(), curses.COLOR_BLUE)
+                stdscr.addstr(pos_y + 2 + y*2, pos_x + 2 + x*4, cell.upper(), curses.color_pair(4))
             else:
                 stdscr.addstr(pos_y + 2 + y*2, pos_x + 2 + x*4, cell.upper())
 

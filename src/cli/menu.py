@@ -1,14 +1,18 @@
 import curses
 import time
 
-def run(stdscr: curses.window):
+def run(stdscr: curses.window, game=None, selection=0):
     height, width = stdscr.getmaxyx()
 
     # Key map to display
     key_map = "q - Quit | h - Help | Arrows - Navigate | Enter - Select Option"
-    selection = 0
     options = ["new game", "help", "exit"]
     return_code = [["GAME", 1], ["HELP", 1], ["EXIT", 1]]
+
+    if game is not None:
+        options = ["continue", "new game", "help", "exit"]
+        return_code = [["CONTINUE", 1], ["GAME", 0], ["HELP", 1], ["EXIT", 1]]
+
     curses.curs_set(0)
 
     while True:

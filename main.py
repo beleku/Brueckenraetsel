@@ -24,20 +24,27 @@ def main(stdscr):
     curses.init_pair(1, curses.COLOR_WHITE, curses.COLOR_BLUE)
     curses.init_pair(2, curses.COLOR_WHITE, curses.COLOR_BLACK)
     curses.init_pair(3, curses.COLOR_BLACK, curses.COLOR_WHITE)
+    curses.init_pair(4, 2, curses.COLOR_BLACK)
 
-    screen_opt = ["MENU", "GAME", "HELP", "EXIT"]
+    screen_opt = ["MENU", "GAME", "HELP", "EXIT", "CONTINUE"]
     screen = screen_opt[0]
     difficulty = 1
+    game_state = None
+    game_solution = None
+    mask = None
+    solution_idx = None
 
     while True:
         if screen == "MENU":
-            screen, difficulty = menu.run(stdscr)
+            screen, difficulty = menu.run(stdscr, game_state, 0)
         elif screen == "GAME":
-            screen = game.run(stdscr, difficulty)
+            screen, game_state, game_solution, mask, solution_idx = game.init(stdscr)
         elif screen == "HELP":
             screen = "MENU"
         elif screen == "EXIT":
             break
+        elif screen == "CONTINUE":
+            screen, game_state, game_solution, mask, solution_idx = game.run(stdscr, game_state, game_solution, mask, solution_idx)
     stdscr.clear()
 
 
