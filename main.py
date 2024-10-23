@@ -4,6 +4,7 @@ from curses.textpad import rectangle
 
 from src.cli import menu
 from src.cli import game
+from src.cli import win
 
 
 def draw_keymap(stdscr):
@@ -22,29 +23,29 @@ def draw_keymap(stdscr):
 
 def main(stdscr):
     curses.init_pair(1, curses.COLOR_WHITE, curses.COLOR_BLUE)
-    curses.init_pair(2, curses.COLOR_WHITE, curses.COLOR_BLACK)
+    curses.init_pair(2, curses.COLOR_BLUE, curses.COLOR_BLACK)
     curses.init_pair(3, curses.COLOR_BLACK, curses.COLOR_WHITE)
-    curses.init_pair(4, 2, curses.COLOR_BLACK)
+    curses.init_pair(4, curses.COLOR_GREEN, curses.COLOR_BLACK)
+    curses.init_pair(5, curses.COLOR_RED, curses.COLOR_BLACK)
 
-    screen_opt = ["MENU", "GAME", "HELP", "EXIT", "CONTINUE"]
+    screen_opt = ["MENU", "GAME", "HELP", "EXIT", "CONTINUE", "WIN"]
     screen = screen_opt[0]
     difficulty = 1
-    game_state = None
-    game_solution = None
-    mask = None
-    solution_idx = None
+    current_game = None
 
     while True:
         if screen == "MENU":
-            screen, difficulty = menu.run(stdscr, game_state, 0)
+            screen, difficulty = menu.run(stdscr, current_game, 0)
         elif screen == "GAME":
-            screen, game_state, game_solution, mask, solution_idx = game.init(stdscr)
+            screen, current_game = game.premade_game(stdscr)
         elif screen == "HELP":
             screen = "MENU"
         elif screen == "EXIT":
             break
         elif screen == "CONTINUE":
-            screen, game_state, game_solution, mask, solution_idx = game.run(stdscr, game_state, game_solution, mask, solution_idx)
+            screen, current_game = game.run(stdscr, current_game)
+        elif screen == "WIN":
+            screen = win.run(stdscr)
     stdscr.clear()
 
 

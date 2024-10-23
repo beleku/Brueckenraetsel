@@ -1,6 +1,6 @@
 def generate(riddle, solution: str):
     if len(riddle) != len(solution):
-        raise ValueError("Die Anzahl Rätselteile muss die selbe länge haben wie die Lösung")
+        raise ValueError("Die Anzahl der Rätselteile muss die selbe länge haben wie die Lösung")
 
     x, y = 0, len(solution)
     solution_idx = 0
