@@ -10,4 +10,9 @@ Ein Brückenrätsel, das in der Konsole gespielt werden kann.
 python3 main.py
 ```
 
+## Notes
+- Wenn das Programm abschmiert wenn man das Spiel startet, dann liegt das daran, dass die Konsole zu klein ist.
+- Bis jetzt gibts nur ein vorgefertigtes Rätsel aber das wird sich noch Ändern.
+- Viel Spaß beim Spielen!
+
 by Benedict Kupetz
