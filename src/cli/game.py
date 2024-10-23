@@ -63,7 +63,7 @@ def premade_game(stdscr: curses.window):
               ["nudel", "holz", "bein"],  # h
               ["quell", "code", "wort"],  # d
               ["wasser", "fall", "beil"],  # a
-              ["hunde", "baby", "pause"]]  # y doppelt
+              ["hunde", "baby", "klappe"]]  # y doppelt
 
     solution = "happybirthday"
     return run(stdscr, Game(riddle, solution))
