@@ -1,9 +1,14 @@
 # Brückenrätsel
 Ein Brückenrätsel, das in der Konsole gespielt werden kann.
 
-## Requirements:
+## Requirements
 - Linux-Betriebsystem
 - python3
+
+## How to install
+```
+git clone https://github.com/beleku/Brueckenraetsel.git
+```
 
 ## How to run
 ```
