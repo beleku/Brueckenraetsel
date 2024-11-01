@@ -19,6 +19,7 @@ with open(dictionary_path, "r") as f:
 print("Dictionary read!")
 print("Finding brücken...")
 brücken = {}
+
 for i, word in enumerate(dictionary[:1000]):
     contenders = []
     for j, word_2 in enumerate(dictionary[i+1:]):
@@ -30,8 +31,9 @@ for i, word in enumerate(dictionary[:1000]):
     vaild_words = []
 
     for contender in contenders:
-        if contender in dictionary:
-            vaild_words.append(contender)
+        contender = contender[len(word):]
+        if contender[len(word):] in dictionary:
+            vaild_words.append(contender[len(word):])
 
     if len(contenders) > 0:
         brücken[word] = contenders
