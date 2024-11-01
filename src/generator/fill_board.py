@@ -1,4 +1,4 @@
-def generate(riddle, solution: str):
+def generate_board(riddle, solution: str):
     if len(riddle) != len(solution):
         raise ValueError("Die Anzahl der Rätselteile muss die selbe länge haben wie die Lösung")
 
@@ -57,7 +57,7 @@ def main():
     riddle = [["vogel", "schreck", "schraube"], ["haar", "gummi", "baer", ], ["laden", "schluss", "licht"]]
     solution = "eis"
 
-    generate(riddle, solution)
+    generate_board(riddle, solution)
 
 
 if __name__ == "__main__":
