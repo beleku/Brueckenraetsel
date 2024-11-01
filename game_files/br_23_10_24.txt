@@ -1,0 +1,14 @@
+solution: volkszaehlung
+strassen, verkehr, samt
+sprach, los, bude
+kirsch, lorbeer, blatt
+zylinder, kopf, hoerer
+teppich, schaum, wein
+wunsch, konzert, saal
+gewissen, haft, notiz
+buegel, waesche, trommel
+woerter, buch, handelung
+getraenke, halter, los
+koffer, raum, aufteilung
+schau, fenster, putzer
+spazier, gang, art

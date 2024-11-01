@@ -1,0 +1,17 @@
+# Brückenrätsel
+solution: HappyBirthday
+
+# Rätsel
+nudel, holz, bein
+wochen, tage, dieb
+fenster, putzer, fisch
+wasser, spiegel, bild
+abwehr, system, administration
+himmel, blau, pause
+spaghetti, eis, bein
+vogel, schreck, schraube
+kaffee, klatsch, presse
+nudel, holz, bein
+quell, code, wort
+wasser, fall, beil
+hunde, baby, klappe

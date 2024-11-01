@@ -1,0 +1,8 @@
+# Brückenrätsel
+# Lösungswort muss hinter 'solution: ' stehen
+solution: EIS
+
+# Rätsel
+fenster, putzer, fisch
+wasser, Spiegel, bild
+kaffe, klatsch, pResse
