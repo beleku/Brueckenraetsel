@@ -5,6 +5,7 @@ from curses.textpad import rectangle
 from src.cli import menu
 from src.cli import game
 from src.cli import win
+from src.cli import load_game
 
 
 def draw_keymap(stdscr):
@@ -28,7 +29,7 @@ def main(stdscr):
     curses.init_pair(4, curses.COLOR_GREEN, curses.COLOR_BLACK)
     curses.init_pair(5, curses.COLOR_RED, curses.COLOR_BLACK)
 
-    screen_opt = ["MENU", "GAME", "HELP", "EXIT", "CONTINUE", "WIN"]
+    screen_opt = ["MENU", "GAME", "HELP", "EXIT", "CONTINUE", "LOAD", "WIN"]
     screen = screen_opt[0]
     difficulty = 1
     current_game = None
@@ -44,6 +45,8 @@ def main(stdscr):
             break
         elif screen == "CONTINUE":
             screen, current_game = game.run(stdscr, current_game)
+        elif screen == "LOAD":
+            screen, current_game = game.run(stdscr, load_game.run(stdscr))
         elif screen == "WIN":
             screen = win.run(stdscr)
     stdscr.clear()

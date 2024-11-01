@@ -1,14 +1,14 @@
 import curses
 import time
 
-import src.generator.grid as generator
+import src.generator.fill_board as generator
 from src.cli import table
 from src.generator.cursor_logic import Cursor
 
 
 class Game:
     def __init__(self, riddle: [[str]], solution: str):
-        self.board, self.grid_solution, self.mask, self.solution_idx = generator.generate(riddle, solution)
+        self.board, self.grid_solution, self.mask, self.solution_idx = generator.generate_board(riddle, solution)
         self.solved_rows = [False for _ in range(len(riddle))]
         self.current = -1
         self.stop = len(self.board)*len(self.board[0])
@@ -70,6 +70,8 @@ def premade_game(stdscr: curses.window):
 
 
 def run(stdscr: curses.window, game: Game):
+    if game is None:
+        return "MENU", None
     stdscr.clear()
     stdscr.addstr(0, 0, "Brückenrätsel | Spiel", curses.A_BOLD)
     cursor = Cursor(0, 0, game.mask)
