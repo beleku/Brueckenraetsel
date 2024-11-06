@@ -1,14 +1,16 @@
 import curses
 import time
 
-import src.generator.fill_board as generator
-from src.cli import table
+from src.generator.fill_board import generate_board
+from src.generator.riddle import create_riddle
 from src.generator.cursor_logic import Cursor
+from src.cli import table
+
 
 
 class Game:
     def __init__(self, riddle: [[str]], solution: str):
-        self.board, self.grid_solution, self.mask, self.solution_idx = generator.generate_board(riddle, solution)
+        self.board, self.grid_solution, self.mask, self.solution_idx = generate_board(riddle, solution)
         self.solved_rows = [False for _ in range(len(riddle))]
         self.current = -1
         self.stop = len(self.board)*len(self.board[0])
@@ -66,6 +68,11 @@ def premade_game(stdscr: curses.window):
               ["hunde", "baby", "klappe"]]  # y doppelt
 
     solution = "happybirthday"
+    return run(stdscr, Game(riddle, solution))
+
+
+def new_random_game(stdscr: curses.window, length=5):
+    riddle, solution = create_riddle(length)
     return run(stdscr, Game(riddle, solution))
 
 

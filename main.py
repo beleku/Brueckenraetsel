@@ -38,7 +38,7 @@ def main(stdscr):
         if screen == "MENU":
             screen, difficulty = menu.run(stdscr, current_game, 0)
         elif screen == "GAME":
-            screen, current_game = game.premade_game(stdscr)
+            screen, current_game = game.new_random_game(stdscr)
         elif screen == "HELP":
             screen = "MENU"
         elif screen == "EXIT":
